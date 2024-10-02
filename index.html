@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction à l'Intelligence Artificielle - Séance 1</title>
+
+    <!-- Lien vers le CDN de Reveal.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css">
+
+    <!-- Inclusion de MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 0.1 : Présentation du module -->
+            <section>
+                <h2 id="titre-slide">Présentation du module</h2>
+                <p id="paragraphe-slide"><span style="color: #eb9c35;">Nom du module :</span> Introduction à l'Intelligence Artificielle</p>
+                <p id="paragraphe-slide" ><span style="color: #eb9c35;">Formateur :</span> Sullivan Bitho (<span style="color: #007BFF;">sullivan.bitho@gmail.com</span>)</p>
+                <p id="paragraphe-slide"><span style="color: #eb9c35;">Organisation du module :</span>
+                    <ul id="liste-slide">
+                        <li>8 séances d'1 heure.</li>
+                        <li>2 projets en groupe.</li>
+                        <li>Applications utilisées: Moodle, Notebook (Jupyter), Discord</li>
+                    </ul>
+                <p id="paragraphe-slide" style="color: #eb9c35;"><strong>Objectifs du module :</strong></p>
+                <ul id="liste-slide">
+                    <li onclick="Reveal.slide(1);">Découvrir les concepts de bases de l'Intelligence Artificielle (Séance 1)</span></li>
+                    <li style="color: #ffffff50">Comprendre les approches symboliques de l'IA (Séance 2)</li>
+                    <li style="color: #ffffff50">Introduire les principes fondamentaux du Machine Learning (Séance 3)</li>
+                    <li style="color: #ffffff50">Explorer les concepts d'apprentissage supervisé et non supervisé (Séance 4)</li>
+                    <li style="color: #ffffff50">Introduire les concepts du Deep Learning et des réseaux de neurones (Séance 5)</li>
+                    <li style="color: #ffffff50">Comprendre le traitement du langage naturel (NLP) et ses applications (Séance 6)</li>
+                    <li style="color: #ffffff50">Étudier la vision par ordinateur et les applications avancées de l'IA (Séance 7)</li>
+                    <li style="color: #ffffff50">Discuter des enjeux éthiques, de la sécurité et des perspectives futures de l'IA (Séance 8)</li>
+                </ul>
+                
+            </section>
+
+            <!-- Slide 0.1.1 : Contenu du module -->
+            <!--<section data-transition="fade">
+                <h2 id="titre-slide">Contenu du module</h2>
+                <ul id="liste-slide">
+                    <li data-fragment="fade-in" style="color: #eb9c35;">Séance 1 : Concepts de base de l'IA</li>
+                    <li data-fragment="fade-in">Séance 2 : Les Approches Symboliques en IA</li>
+                    <li data-fragment="fade-in">Séance 3 : Introduction au Machine Learning</li>
+                    <li data-fragment="fade-in">Séance 4 : Apprentissage Supervisé et Non Supervisé</li>
+                    <li data-fragment="fade-in">Séance 5 : Introduction au Deep Learning</li>
+                    <li data-fragment="fade-in">Séance 6 : Traitement du Langage Naturel (NLP)</li>
+                    <li data-fragment="fade-in">Séance 7 : Vision par Ordinateur et Applications d'IA Avancées</li>
+                    <li data-fragment="fade-in">Séance 8 : Éthique, Sécurité et Futur de l'IA</li>
+                </ul>
+            </section> -->
+
+            <!-- Slide 0.2 : Contenu de la séance -->
+            <section data-transition="fade">
+                <h2 id="titre-slide">Séance 1 : Concepts de base de l'IA</h2>
+                <p style="text-align: center; font-size: 0.5em;"><span style="color: #eb9c35;">Objectif :</span> Découvrir les concepts de base de l'Intelligence Artificielle.</p>
+                <ul id="liste-slide">
+                    <li>Définition de l’IA</li>
+                    <li>Historique de l’IA</li>
+                    <li>Pourquoi l'IA?</li>
+                    <li>Domaines de l’IA : Machine Learning, Deep Learning, IA Symbolique, etc.</li>
+                    <li>Activité 1</li>
+                </ul>
+            </section>
+            
+            <!-- Slide 0.3 : Ice-breaker - Challenge en groupe -->
+            <section data-transition="fade">
+                <h2 id="titre-slide">Ice-breaker!</h2>
+                <p id="paragraphe-slide" style="color: #eb9c35;">Faisons connaissance!</p>
+                <ul id="liste-slide" style="position: relative; left: -17%">
+                    <li>Présentez-vous en quelques <span style="color: #eb9c35">mots</span>.</li>
+                    <li>Quel est votre intérêt pour l'<span style="color: #eb9c35">IA</span> ?</li>
+                    <li>Quelles sont vos attentes pour ce <span style="color: #eb9c35">module</span> ?</li>
+                </ul>
+                <div class="fragment">
+                    <p id="paragraphe-slide" style="color: #eb9c35;">Challenge en groupe!</p>
+                    <ul id="liste-slide">
+                        <li>Mettez-vous par <span style="color: #eb9c35;">groupes</span> (3-4 personnes).</li>
+                        <li>Essayez de proposer une solution pour <span style="color: #eb9c35;">identifier</span> si un e-mail est un spam ou non. <br>(Par exemple: un algorithme de la forme: <span style="font-family: 'Courier New', Courier, monospace;"> Est_Spam(Mail) -> Booléen</span>)</li>
+                        <li>Time's up dans 5 minutes.</li>
+                    </ul>
+                </div>
+                <p id="paragraphe-slide" class="fragment">Indice: existe-t-il des caractéristiques récurrentes dans les spams?</p>
+            </section>
+
+            <!-- Slide 1 : Définitions -->
+            <section>
+                <h2 id="titre-slide" style="position: relative; left: 8%;">Qu'est-ce que l'Intelligence Artificielle?</h2>
+                <p id="paragraphe-slide" class="fragment">
+                    <span style="color: #eb9c35;">Définition fondatrice :</span> "La construction de programmes informatiques qui s'adonnent à des tâches qui sont, pour l'instant, accomplies de façon plus satisfaisante par des êtres humains car elles demandent des processus mentaux de haut niveau tels que : l'apprentissage perceptuel, l'organisation de la mémoire et le raisonnement critique."<sup>[1]</sup>
+                </p>
+                <p id="paragraphe-slide" class="fragment">
+                    <span style="color: #eb9c35;">Définition contemporaine :</span> "Ensemble de théories et de techniques mises en œuvre en vue de réaliser des machines capables de simuler l'intelligence humaine."<sup>[2]</sup>
+                </p>
+                <p id="paragraphe-slide" class="fragment">
+                    Postulat de John McCarthy (Dartmouth, 1956): "Toute activité intellectuelle peut être décrite avec suffisamment de précision pour être simulée par une machine."<sup>[3]</sup>
+                </p>
+                <p id="paragraphe-slide" class="fragment">
+                    Définitions différentes selon l'<span style="color: #eb9c35;">époque</span> (contexte) et le <span style="color: #eb9c35;">type</span> d'IA (forte ou faible).
+                </p>
+                <!-- Références -->
+                <div id="references" class="fragment">
+                    <ol style="position:relative; left: -7em; font-size: 0.5em;">
+                        <li>https://www.ibm.com/fr-fr/topics/artificial-intelligence</li>
+                        <li>Larousse, 2024</li>
+                        <li>John McCarthy, Conférence de Dartmouth, 1956</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Slide 2 : Historique de l'IA -->
+            <section data-transition="fade" style="font-size: 0.2em;">
+                <h2 id="titre-slide-histoire">Historique de l'IA</h2>
+                <div class="timeline">
+                    <div class="event" data-details="Alan Turing propose la machine de Turing et le test de Turing (1950). Premiers programmes d'IA pour résoudre des problèmes mathématiques et jouer à des jeux.">
+                        <h3>Les débuts (1940-1950)</h3>
+                        <ul id="liste-slide-histoire">
+                            <li>Machine de Turing</li>
+                            <li>Test de Turing</li>
+                        </ul>
+                    </div>
+                    <div class="event" data-details="Dartmouth Conference (1956) : naissance officielle du terme 'Intelligence Artificielle'. Développement des premiers systèmes experts et résolution de problèmes symboliques. Exemples : Logic Theorist, General Problem Solver (GPS).">
+                        <h3>L'âge d'or (1950-1960)</h3>
+                        <ul id="liste-slide-histoire">
+                            <li>Dartmouth Conference</li>
+                            <li>Systèmes experts</li>
+                        </ul>
+                    </div>
+                    <div class="event" data-details="L’hiver de l'IA : réduction des financements suite aux limites des systèmes symboliques. Critiques des systèmes experts : trop rigides et incapables de gérer des tâches non explicitement codées."> 
+                        <h3>Les défis (années 1970)</h3>
+                        <ul id="liste-slide-histoire">
+                            <li>L’hiver de l’IA</li>
+                            <li>Limites des systèmes symboliques</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="event" data-details="Retour des réseaux de neurones artificiels avec l'algorithme de rétropropagation. Montée du Machine Learning : l'accent est mis sur l'apprentissage à partir de données plutôt que sur des règles explicites."> 
+                        <h3>L'essor (1980-1990)</h3>
+                        <ul id="liste-slide-histoire">
+                            <li>Réseaux de neurones</li>
+                            <li>Machine Learning</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="event" data-details="Big Data et meilleure puissance de calcul (notamment via les GPU). Deep Learning avec les réseaux de neurones profonds révolutionne des domaines comme la reconnaissance d'images, le traitement du langage naturel (NLP) et la traduction automatique. Victoire d'AlphaGo (2016) contre le champion du monde de Go, Lee Sedol."> 
+                        <h3>Deep Learning (2000-2010)</h3>
+                        <ul id="liste-slide-histoire">
+                            <li>Big Data</li>
+                            <li>AlphaGo</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="event" data-details="L'IA est aujourd'hui utilisée à grande échelle dans les voitures autonomes, les assistants vocaux, les systèmes de recommandation, etc. Défis actuels : éthique, biais dans les algorithmes, impact sur l'emploi. Discussions sur la régulation et la sécurité des systèmes d'IA."> 
+                        <h3>IA actuelle</h3>
+                        <ul id="liste-slide-histoire">
+                            <li>Applications modernes</li>
+                            <li>Défis éthiques</li>
+                        </ul>
+                    </div>
+
+                <!-- Ligne verticale en pointillé -->
+                <div class="fragment" style="border-left: 2px dashed white; height: 100%; position: absolute; left: 50%;"></div>
+                
+                </div>
+                <div id="details-popup" class="hidden"></div>
+
+                <script>
+
+                    cons = false;
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const events = document.querySelectorAll('.event');
+                        const detailsPopup = document.getElementById('details-popup');
+                        const timeline = document.querySelector('.timeline');
+                        let scale = 1;  // Facteur de zoom initial
+                        let isDragging = false;
+                        let startX, startY; // Positions initiales lors du clic
+                        let currentTranslateX = 0, currentTranslateY = 0; // Valeurs actuelles de translation
+                        let lastTranslateX = 0, lastTranslateY = 0; // Mémorisation des dernières translations
+
+
+                        // Fonction de zoom
+                        timeline.addEventListener('wheel', function(e) {
+                            e.preventDefault();
+                            // Ajuster le facteur de zoom
+                            if (e.deltaY < 0) {
+                                scale += 0.1; // Zoom avant
+                            } else {
+                                scale -= 0.1; // Zoom arrière
+                            }
+
+                            // Limiter l'échelle entre 0.5x et 3x
+                            scale = Math.min(Math.max(0.5, scale), 3);
+                            
+                            // Appliquer l'échelle à la timeline
+                            timeline.style.transform = `scale(${scale})`;
+                        });
+
+                        // Commence le déplacement (drag)
+                        timeline.addEventListener('mousedown', function(e) {
+                            isDragging = true;
+                            startX = e.clientX; // Position initiale de la souris
+                            startY = e.clientY;
+                        });
+
+                        // Déplacement de la fresque lors du drag
+                        document.addEventListener('mousemove', function(e) {
+                            if (!isDragging) return;
+
+                            const dx = e.clientX - startX;  // Déplacement en X
+                            const dy = e.clientY - startY;  // Déplacement en Y
+
+                            // Appliquer la translation actuelle
+                            currentTranslateX = lastTranslateX + dx;
+                            currentTranslateY = lastTranslateY + dy;
+
+                            timeline.style.transform = `scale(${scale}) translate(${currentTranslateX}px, ${currentTranslateY}px)`;
+                        });
+
+                        // Fin du déplacement
+                        document.addEventListener('mouseup', function() {
+                            if (!isDragging) return;
+                            isDragging = false;
+
+                            // Mémorisation de la dernière position
+                            lastTranslateX = currentTranslateX;
+                            lastTranslateY = currentTranslateY;
+                        });
+
+                        events.forEach(eventElement => {
+                            const details = eventElement.getAttribute('data-details');
+                            const listItems = eventElement.querySelectorAll('li');
+
+                            listItems.forEach(item => {
+                                item.addEventListener('mouseenter', function(e) {
+                                    detailsPopup.innerHTML = `<strong>${eventElement.querySelector('h3').innerText}</strong><p style="font-size: 0.5em;">${details}</p>`;
+                                    detailsPopup.style.display = 'block';
+                                });
+
+                                item.addEventListener('mousemove', function(e) {
+                                    const slideRect = eventElement.closest('section').getBoundingClientRect();
+                                    const popupWidth = detailsPopup.offsetWidth;
+                                    const windowWidth = window.innerWidth;
+                                    const mouseX = e.clientX;
+                                    const mouseY = e.clientY;
+
+                                    detailsPopup.style.left = `20%`;
+                                    detailsPopup.style.top = `150px`;
+
+                                    if (cons == false) {
+                                        cons = true;
+                                        console.log("1 mouseX = " + mouseX);
+                                        console.log("1 slideRect.left = " + slideRect.left);
+                                        console.log("1 style_left = " + detailsPopup.style.left);
+                                    }
+
+                                });
+
+                                item.addEventListener('mouseleave', function() {
+                                    detailsPopup.style.display = 'none';
+                                });
+                            });
+                        });
+                    });
+                </script>
+            </section>
+
+            <!-- Slide 3.1 : Domaines de l'IA -->
+            <section>
+                <h2 id="titre-slide">Domaines de l'IA</h2>
+                <ul id="liste-slide">
+                    <li class="fragment">Machine Learning</li>
+                    <li class="fragment">Deep Learning</li>
+                    <li class="fragment">Data Science</li>
+                    <li class="fragment">Traitement du langage naturel (NLP)</li>
+                    <li class="fragment">Vision par ordinateur</li>
+                    <li class="fragment">...</li>
+                </ul>
+            </section>
+
+            <!-- Slide 3.2 : Domaines de l'IA -->
+            <section>
+                <h2 id="titre-slide">Roadmap des domaines de l'IA</h2>
+                <div id="diagram"></div> <!-- Conteneur pour D3.js -->
+            </section>
+
+            <!-- Slide 8 : Récapitulatif -->
+            <section>
+                <h2 id="titre-slide">Récapitulatif de la séance</h2>
+                <ul id="liste-slide">
+                    <li class="fragment">Nous avons introduit l'intelligence artificielle et ses concepts de base.</li>
+                    <li class="fragment">Nous avons exploré les différents types d'IA : IA faible vs IA forte.</li>
+                    <li class="fragment">Nous avons discuté des principaux domaines de l'IA comme le machine learning, deep learning, IA symbolique.</li>
+                    <li class="fragment">Les groupes ont proposé des solutions pour classifier un e-mail comme spam ou non.</li>
+                </ul>
+                <p id="paragraphe-slide">Prochain cours : Les approches symboliques en IA</p>
+            </section>
+
+            <!-- Slide 9 : Activité -->
+            <section>
+                <h2 id="titre-slide">Activité</h2>
+                <p id="paragraphe-slide">Discussion sur les innovations actuelles en IA.</p>
+            </section>
+
+            <!-- Slide Annexe 1 : Autres approche de l'IA -->
+            <section id="large-slide" data-transition="fade" style="font-size: 0.5em;">
+                <h2 id="titre-slide">Autres Approches en Intelligence Artificielle</h2>
+                <div style="display: flex; justify-content: center; align-items: flex-start; width: 100%; margin: auto;">
+                    <!-- IA Symbolique -->
+                    <div style="width: 40%; text-align: left; position: relative; left: -10%;">
+                        <h2 id="titre-slide" style="position: relative; left: 3%;">IA Symbolique</h2>
+                        <!-- Conteneur pour les images avec une grille invisible -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto;  grid-row-gap: -100%; justify-items: center; position: relative; left: -30%;">
+                            <!-- Première image centrée sur deux colonnes avec une légende -->
+                            <figure class="fragment" style="grid-column: span 2; text-align: center; position: relative; top: -25%;">
+                                <img src="Img/deepblue-kasparov.jpg" alt="IA Symbolique Image" style="max-width: 80%;">
+                                <figcaption style="position: relative; top: -7%;">Deep Blue vs Kasparov</figcaption>
+                            </figure>
+
+                            <!-- Les deux images avec leurs légendes dans la deuxième ligne -->
+                            <figure class="fragment" style="text-align: center; position: relative; top: -67%;">
+                                <div class="image-container">
+                                    <img src="Img/coqide_50.png" alt="Agrandir l'image" style="max-width: 100%;" class="small-image">
+                                </div>
+                                <figcaption style="position: relative; top: -10%;">Coq IDE</figcaption>
+                            </figure>
+
+                            <div id="overlay" style="left: -10%; top: -10%;">
+                                <img id="overlay-img" src="Img/coqide_50.png" alt="Image agrandie" style="z-index: 10;">
+                            </div>
+                            
+                            <figure class="fragment" style="text-align: center; position: relative; top: -62%;">
+                                <img src="Img/Mycin_50.jpg" alt="IA Symbolique Image" style="max-width: 100%;">
+                                <figcaption style="position: relative; top: -2%;">Mycin</figcaption>
+                            </figure>
+
+                            <!-- Ajout de la liste dans une nouvelle ligne qui s'étend sur 2 colonnes -->
+                            <ul id="liste-slide" style="grid-column: span 2; position: relative; margin-left: -10%; margin-right: -30%; top: -120%; left: -10%; font-size: 1em;">
+                                <li class="fragment"><strong><span style="color: #eb9c35;">Problèmes Traités:</span></strong> Raisonnement logique, diagnostic, planification.</li>
+                                <li class="fragment"><strong><span style="color: #eb9c35;">Algorithme:</span></strong> Basée sur des <i>règles</i> logiques prédéfinies et la manipulation de <i>symboles</i>.</li>
+                                <li class="fragment"><strong><span style="color: #eb9c35;">Exemples:</span></strong> Deep Blue, Prover9, Mycin.</li>
+                                <li class="fragment"><strong><span style="color: #eb9c35;">Domaines d'Application:</span></strong> Diagnostic médical, aide à la décision.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- IA Combinatoire -->
+                    <div style="width: 40%; text-align: left; position: relative; left: 8%;">
+                        <h2 id="titre-slide" style="position: relative; left: 3%;">IA Combinatoire</h2>
+                        <!-- Conteneur pour les images avec une grille invisible -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto;  grid-row-gap: -100%; justify-items: center; position: relative; left: -15%;">
+                            <!-- Première image centrée sur deux colonnes avec une légende -->
+                            
+
+                            <!-- Les deux images avec leurs légendes dans la deuxième ligne -->
+                            <figure class="fragment" style="text-align: center; position: relative; top: -25%;">
+                                <img src='https://j.gifs.com/Kerqkn.gif' alt="IA Combinatoire Image 1" style="max-width: 150%;">
+                                <figcaption style="position: relative; top: -8%; left: 25%; margin-left: -20%; margin-right: -20%;">Swarm Optimization</figcaption>
+                            </figure>
+
+                            <figure class="fragment index 1" style="text-align: center; position: relative; top: 54%; left: -152%; z-index: 0">
+                                <img src="Img/Production_Optimisation.jpg" alt="IA Combinatoire Image 3" style="max-width: 150%; z-index: 0;">
+                                <figcaption style="position: relative; top: -7%; left: 25%">Production</figcaption>
+                            </figure>
+
+                            <figure class="fragment index 2" style="text-align: center; position: relative; top: -67%; left: 58%">
+                                <img src="Img/Transport_Logistique.jpg" alt="IA Combinatoire Image 2" style="max-width: 150%; position: relative;">
+                                <figcaption style="position: relative; left: 25%; top: -10%; margin-left: -20%; margin-right: -20%;">Transport et logistique</figcaption>
+                            </figure>
+
+                            <!-- Ajout de la liste dans une nouvelle ligne qui s'étend sur 2 colonnes -->
+                            <ul id="liste-slide" style="grid-column: span 2; position: relative; margin-left: -10%; margin-right: -20%; top: -122%; left: -20%; font-size: 1em;">
+                                <li class="fragment"><strong><span style="color: #eb9c35;">Problèmes Traités:</span></strong> Optimisation, planification, CSP.</li>
+                                <li class="fragment"><strong><span style="color: #eb9c35;">Algorithme:</span></strong> Basée sur la <i>recherche</i> de solutions parmi un grand ensemble de <i>combinaisons</i>.</li>
+                                <li class="fragment"><strong><span style="color: #eb9c35;">Exemples:</span></strong> Livraison Amazon, Google Map, Orange (réseaux).</li>
+                                <li class="fragment"><strong><span style="color: #eb9c35;">Domaines d'Application:</span></strong> Transport, Aérospatiale, Social, Finance.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button to return to slide 10 -->
+                <div class="fragment" style="text-align: center; position: absolute; top: 20%; left: 35%; max-width: 4%;">
+                    <img src="Img/ret.png" alt="Retour" style="cursor: pointer;" onclick="Reveal.slide(6);">
+                </div>
+            </section>
+
+            <!-- Slide Annexe 2 : Machine Learning -->
+            <section>
+                <h2 id="titre-slide">Machine Learning</h2>
+                <p id="paragraphe-slide">Apprentissage automatique: Génère un modèle de prédiction à partir de patterns identifiés dans des données.</p>
+                <ul id="liste-slide">
+                    <li>Types d'apprentissage en ML :</li>
+                    <ul>
+                        <li>Apprentissage supervisé : le modèle est entraîné à partir de données étiquetées (ex. : classification).</li>
+                        <li>Apprentissage non supervisé : le modèle apprend à partir de données non étiquetées (ex. : clustering).</li>
+                        <li>Apprentissage par renforcement : l'algorithme apprend par essais et erreurs en recevant des récompenses.</li>
+                    </ul>
+                    <li>Exemples d'algorithmes populaires :</li>
+                    <ul>
+                        <li>Régression linéaire, arbres de décision, SVM, réseaux de neurones, etc.</li>
+                    </ul>
+                    <li>Domaines d'application :</li>
+                    <ul>
+                        <li>Reconnaissance d'image, traitement du langage naturel, systèmes de recommandation, etc.</li>
+                    </ul>
+                </ul>
+            </section>
+
+            <!-- Slide Annexe 2 : Machine Learning -->
+            <section style="background: transparent; font-size: 0.3em;">
+                <h2 id="titre-slide" style="color: white;">Machine Learning</h2>
+                <div class="ml-container">
+                    <!-- Apprentissage Supervisé -->
+                    <div class="ml-column" style="background: transparent;">
+                        <p style="color: white;">Apprentissage supervisé</p>
+                        <ul style="color: white;">
+                            <li>Type de données : Étiquetées.</li>
+                            <li>Le modèle apprend à partir de données avec des labels prédéfinis.</li>
+                            <li>Exemples d'algorithmes : Régression linéaire, arbres de décision, support vector machines (SVM).</li>
+                            <li>Applications : Reconnaissance d'images, prédiction de ventes, diagnostics médicaux.</li>
+                        </ul>
+                        <p style="color: white;">Détection de spams</p>
+                        <!-- Exemple : Détection de spams
+Pour cette méthode, utiliser la détection de spams reste parfait. Cela permet d'illustrer un algorithme supervisé (comme la régression logistique, les SVM ou les arbres de décision) où l'algorithme apprend à partir de données étiquetées ("spam" ou "non-spam").
+Explication : Des données d'entraînement avec des e-mails étiquetés (spam ou non-spam) sont utilisées pour apprendre au modèle à reconnaître les caractéristiques d'un spam (mots suspects, longueur du texte, etc.). -->
+                    </div>
+            
+                    <!-- Apprentissage Non Supervisé -->
+                    <div class="ml-column" style="background: transparent;">
+                        <p style="color: white;">Apprentissage non supervisé</p>
+                        <ul style="color: white;">
+                            <li>Type de données : Non étiquetées.</li>
+                            <li>Le modèle cherche à trouver des structures cachées sans labels.</li>
+                            <li>Exemples d'algorithmes : K-means, clustering hiérarchique, réseaux de neurones auto-encodeurs.</li>
+                            <li>Applications : Segmentation de marché, regroupement de clients, analyse de documents.</li>
+                        </ul>
+
+                        <p style="color: white;">Détection de spams</p>
+                        <!-- -->
+                    </div>
+            
+                    <!-- Apprentissage par Renforcement -->
+                    <div class="ml-column" style="background: transparent;">
+                        <p style="color: white;">Apprentissage par renforcement</p>
+                        <ul style="color: white;">
+                            <li>Type de données : Basé sur des récompenses et pénalités.</li>
+                            <li>Le modèle interagit avec un environnement et apprend par essais et erreurs.</li>
+                            <li>Exemples d'algorithmes : Q-learning, Deep Q-Network (DQN), SARSA.</li>
+                            <li>Applications : Jeux vidéo, robots autonomes, voitures autonomes, trading automatisé.</li>
+                        </ul>
+
+                        <p style="color: white;">Mario Bros</p>
+                        <!-- -->
+                    </div>
+                </div>
+            </section>
+            
+
+            <!-- CSS mis à jour -->
+            <style>
+                .ml-container {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: -10%;
+                }
+
+                .ml-column {
+                    width: 30%;
+                    padding: 1em;
+                    box-sizing: border-box;
+                    border: 1px solid transparent; /* Enlever la bordure visible */
+                }
+
+                #titre-slide {
+                    font-size: 2em;
+                    text-align: center;
+                }
+
+                h3 {
+                    font-size: 1.5em;
+                    text-align: center;
+                    margin-bottom: 0.5em;
+                }
+
+                p {
+                    font-size: 1em;
+                    text-align: justify;
+                }
+            </style>
+
+            
+            <!-- Slide Annexe 3 : Deep Learning -->
+            <section>
+                <h2 id="titre-slide">Deep Learning</h2>
+                <p id="paragraphe-slide">Le Deep Learning est une branche du Machine Learning qui utilise des réseaux de neurones artificiels profonds. Il se distingue par sa capacité à traiter de grandes quantités de données, en particulier pour des tâches complexes comme la reconnaissance d'image, le traitement du langage naturel et la traduction automatique.</p>
+                <ul id="liste-slide">
+                    <li>Caractéristiques du Deep Learning :</li>
+                    <ul>
+                        <li>Réseaux de neurones artificiels à plusieurs couches (réseaux neuronaux profonds).</li>
+                        <li>Utilisation de grandes quantités de données et de calculs intensifs (GPU).</li>
+                        <li>Algorithmes : backpropagation, convolutional neural networks (CNN), recurrent neural networks (RNN).</li>
+                    </ul>
+                    <li>Applications courantes :</li>
+                    <ul>
+                        <li>Reconnaissance vocale (ex. : assistants vocaux).</li>
+                        <li>Traitement d'image et de vidéo (ex. : véhicules autonomes).</li>
+                        <li>Traduction automatique (ex. : Google Translate).</li>
+                    </ul>
+                </ul>
+            </section>
+            
+
+            <!-- Slide Annexe 4 : Data Science -->
+            <section>
+                <h2 id="titre-slide">Data Science</h2>
+                <p id="paragraphe-slide">La Data Science est un domaine interdisciplinaire qui combine des techniques scientifiques, mathématiques et informatiques pour analyser des données complexes. Elle permet de découvrir des informations et des patterns dans les données pour soutenir la prise de décision.</p>
+                <ul id="liste-slide">
+                    <li>Étapes du processus de Data Science :</li>
+                    <ul>
+                        <li>Collecte des données.</li>
+                        <li>Nettoyage et transformation des données.</li>
+                        <li>Analyse exploratoire des données (EDA).</li>
+                        <li>Modélisation statistique et machine learning.</li>
+                        <li>Visualisation des résultats.</li>
+                    </ul>
+                    <li>Outils populaires :</li>
+                    <ul>
+                        <li>Python (Pandas, NumPy), R, SQL, Hadoop, Spark, etc.</li>
+                    </ul>
+                    <li>Domaines d'application :</li>
+                    <ul>
+                        <li>Marketing, santé, finance, industrie, etc.</li>
+                    </ul>
+                </ul>
+            </section>
+            
+
+            <!-- Slide Annexe 5 : Big Data -->
+            <section>
+                <h2 id="titre-slide">Big Data</h2>
+                <p id="paragraphe-slide">Le Big Data fait référence à l'ensemble des données massives et complexes qui ne peuvent pas être traitées par des méthodes traditionnelles. Il nécessite des technologies avancées pour la collecte, le stockage, et l'analyse de données en temps réel ou en différé.</p>
+                <ul id="liste-slide">
+                    <li>Les 3 V du Big Data :</li>
+                    <ul>
+                        <li>Volume : quantité énorme de données.</li>
+                        <li>Vélocité : rapidité de génération des données.</li>
+                        <li>Variété : diversité des types de données (structurées, non structurées).</li>
+                    </ul>
+                    <li>Technologies associées :</li>
+                    <ul>
+                        <li>Hadoop, Spark, NoSQL, bases de données distribuées.</li>
+                    </ul>
+                    <li>Domaines d'application :</li>
+                    <ul>
+                        <li>Analyse de sentiments, Internet des Objets (IoT), détection de fraudes, prédiction des tendances du marché.</li>
+                    </ul>
+                </ul>
+            </section>            
+
+        </div>
+    </div>
+
+    <style>
+        #large-slide {
+            width: 1200px; /* Augmente la largeur spécifique de ce slide */
+            height: 900px; /* Augmente la hauteur spécifique de ce slide */
+        }
+
+        #titre-slide {
+            position: relative;
+            top: -50px;  /* Déplace le titre de 20px vers le haut */
+            font-size: 1em;
+        }
+
+        #titre-slide-histoire {
+            position: absolute;
+            top: -200%;
+            left: 30%;  /* Décale le titre vers la droite de 10px */
+            font-size: 4em;
+        }
+        
+        #paragraphe-slide {
+            font-size: 0.5em;
+            text-align: left;
+            position: relative;
+            left: 100px;
+        }
+
+        #liste-slide-histoire {
+            font-size: 1em;
+        }
+
+        #liste-slide {
+            font-size: 0.5em;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+            /*margin-top: 50px;
+            margin-bottom: 50px;*/
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 4px;
+            background-color: #007BFF;
+            top: 40%;
+            left: 5%;
+            transform: translateY(-50%);
+        }
+
+        .event {
+            position: relative;
+            text-align: center;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .event h3 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .event ul {
+            margin-left: -20%;
+            margin-top: 30px;
+            margin-bottom: 0px;
+            
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px;
+            height: 14px;
+            background-color: #007BFF;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        #details-popup {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            position: absolute;
+            bottom: 100px;
+            font-size: 2em;
+            width: 60%;
+            max-width: 600px;
+            display: none;
+            z-index: 10;
+            text-align: left;
+            height: 60px;
+            white-space: normal;
+        }
+
+        .data-details-text {
+            margin-left: 50px;  /* Décale uniquement le texte data-details */
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+            transition: transform 0.2s; /* Transition pour le zoom */
+            cursor: grab;  /* Ajoute un curseur de type "grab" pour indiquer que l'élément peut être déplacé */
+        }
+
+        .timeline:active {
+            cursor: grabbing;  /* Changer le curseur en "grabbing" lorsqu'on clique pour déplacer */
+        }
+
+        /* Style de base pour l'image */
+      .image-container {
+          display: inline-block;
+          z-index: 999;
+      }
+
+      .small-image {
+          width: 150px;
+          height: auto;
+          cursor: pointer;
+      }
+
+      /* Overlay pour afficher l'image en grand */
+    #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    #overlay img {
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    /* Transition pour une animation fluide */
+    #overlay.show {
+        display: flex;
+    }
+    </style>
+    
+
+    <!-- Lien vers le fichier JavaScript de Reveal.js -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+    <script>
+        // Initialisation de Reveal.js avec des options
+        Reveal.initialize({
+            transition: 'fade',        // Transition entre les diapositives
+            fragments: true,           // Activer les fragments pour un affichage progressif
+            controls: true,            // Afficher les contrôles de navigation
+            progress: true,            // Afficher la barre de progression
+            slideNumber: 'c/t',        // Afficher le numéro de la diapositive courante et le total (c: current, t: total)
+            hash: true                 // Permettre la navigation via les URL
+        });
+
+        /* SVG Road Map Ensemble IA */
+        // Dimensions du SVG
+        const width = 600;
+        const height = 500;
+
+        // Créer le conteneur SVG dans l'élément #diagram
+        const svg = d3.select("#diagram")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        // Ajout des cercles imbriqués avec hover colors et click event
+        const circles = [
+            {id: 'ai', cx: 300, cy: 200, r: 150, color: "#FFA07A", hoverColor: "#FFC8A0", label: "Intelligence Artificielle", labelXOffset: 0, labelYOffset: -100, targetSlide: 9},
+            {id: 'ml', cx: 300, cy: 230, r: 120, color: "#CD5C5C", hoverColor: "#E57373", label: "Machine Learning", labelXOffset: 0, labelYOffset: -70, targetSlide: 10},
+            {id: 'dl', cx: 300, cy: 290, r: 60, color: "#8B4513", hoverColor: "#A0522D", label: ["Deep", "Learning"], labelXOffset: 0, labelYOffset: -10, targetSlide: 11},
+            {id: 'ds', cx: 410, cy: 260, r: 100, color: "#4169E1", hoverColor: "#6495ED", label: "Data Science", labelXOffset: 0, labelYOffset: -60, targetSlide: 12},
+            {id: 'bd', cx: 350, cy: 250, r: 40, color: "#4682B4", hoverColor: "#87CEEB", label: "Big Data", labelXOffset: 0, labelYOffset: 0, targetSlide: 13}
+        ];
+
+
+        // Dessiner les cercles et ajouter des événements pour chaque cercle
+        svg.selectAll("circle")
+            .data(circles)
+            .enter()
+            .append("circle")
+            .attr("cx", d => d.cx)
+            .attr("cy", d => d.cy)
+            .attr("r", d => d.r)
+            .attr("fill", d => d.color)
+            .attr("opacity", 0.8)
+            .attr("id", d => d.id)
+            // Ajouter un gestionnaire d'événements pour tous les cercles
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("fill", d.hoverColor); // Change color on hover
+            })
+            .on("mouseout", function(event, d) {
+                d3.select(this).attr("fill", d.color); // Revert to original color
+            })
+            .on("click", function(event) {
+                const [clickX, clickY] = d3.pointer(event); // Obtenir les coordonnées du clic
+                let clickedInsideCircle = false;
+                console.log("clickX = " + clickX);
+                console.log("clickY = " + clickY);
+                // Parcourir chaque cercle pour vérifier si le clic se trouve à l'intérieur
+                circles.slice().reverse().forEach(circle => {
+                    if (clickedInsideCircle == false)
+                    {
+                        const distance = Math.sqrt(Math.pow(clickX - circle.cx, 2) + Math.pow(clickY - circle.cy, 2));
+                        console.log("distance au centre du cercle " + circle.label + "(" + distance + ") <= circle.r (" + circle.r + ") ?");
+                        if (distance <= circle.r) {
+                            console.log("Oui. circle.targetSlide = " + circle.targetSlide);
+                            clickedInsideCircle = true; // Clic à l'intérieur du cercle
+                            Reveal.slide(circle.targetSlide); // Navigate to the associated slide
+                        }
+                        else
+                        {
+                            console.log("Non.");
+                        }
+                    }
+                });
+            });
+
+        // Ajouter des étiquettes aux cercles
+        svg.selectAll("text")
+            .data(circles)
+            .enter()
+            .append("text")
+            .attr("x", d => d.cx + d.labelXOffset)
+            .attr("y", d => d.cy + d.labelYOffset)
+            .attr("text-anchor", "middle")           // Centrer le texte horizontalement
+            .style("font-size", "17px")  // Modifier la taille de la police
+            .style("fill", "white")      // Modifier la couleur du texte
+            .each(function(d) {
+                // Vérifier si le label est un tableau (pour gérer le cas de Deep Learning sur 2 lignes)
+                if (Array.isArray(d.label)) {
+                    d3.select(this)
+                    .selectAll("tspan")
+                    .data(d.label)  // Si le label est un tableau, créer des tspans pour chaque ligne
+                    .enter()
+                    .append("tspan")
+                    .attr("x", d.cx + d.labelXOffset)  // Garder la même position horizontale
+                    .attr("dy", (line, i) => i === 0 ? 0 : "1.2em")  // Décaler les lignes suivantes verticalement
+                    .text(line => line);
+                } else {
+                    // Si le label est une seule ligne, afficher le texte normalement
+                    d3.select(this).text(d.label);
+                }
+            });
+
+            // Agrandir image
+
+            // Sélectionne l'image et l'overlay
+            const smallImage = document.querySelector('.small-image');
+            const overlay = document.getElementById('overlay');
+            const overlayImg = document.getElementById('overlay-img');
+
+            // Affiche l'image agrandie quand la souris survole l'image
+            smallImage.addEventListener('mouseenter', function() {
+                overlay.classList.add('show');
+            });
+
+            // Cache l'image agrandie quand la souris quitte l'overlay
+            overlay.addEventListener('mouseleave', function() {
+                overlay.classList.remove('show');
+            });
+
+    </script>
+</body>
+</html>

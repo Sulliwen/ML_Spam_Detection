@@ -1,0 +1,7 @@
+Contient "gratuit"	Liens > 3	Expéditeur inconnu	Spam/Non-Spam
+Oui  	Non	Oui	Spam
+Non 	Oui 	Non 	Non-Spam
+Non	Oui	Oui	Spam
+Oui	Oui	Non	Spam
+Non	Non	Non	Non-Spam
+Non	Non	Oui	Non-Spam

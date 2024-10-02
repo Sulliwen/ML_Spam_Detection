@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fresque Historique de l'IA</title>
+    <style>
+        /* Styles CSS pour la timeline */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #007BFF;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .container {
+            padding: 20px 30px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .container.left {
+            left: 0;
+        }
+        .container.right {
+            left: 50%;
+        }
+        .date {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+        }
+        .container.left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 25px;
+            right: -15px;
+            border: 15px solid transparent;
+            border-left: 15px solid white;
+        }
+        .container.right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 25px;
+            left: -15px;
+            border: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: #007BFF;
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .container.left::after {
+            left: -12px;
+        }
+        .container.right::after {
+            right: -12px;
+        }
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            .container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .container.right {
+                left: 0%;
+            }
+            .container.left::before, .container.right::before {
+                left: 60px;
+                border: 15px solid transparent;
+                border-left: 15px solid white;
+            }
+            .container.left::after, .container.right::after {
+                left: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="timeline">
+    <!-- Les événements seront injectés ici par JavaScript -->
+</div>
+
+<script>
+    // Données de l'historique
+    const events = [
+        {
+            date: "Années 1940-1950",
+            title: "Les débuts",
+            details: [
+                "Alan Turing propose la machine de Turing et le test de Turing (1950).",
+                "Premiers programmes d'IA pour résoudre des problèmes mathématiques et jouer à des jeux."
+            ]
+        },
+        {
+            date: "Années 1950-1960",
+            title: "L'âge d'or de l'IA symbolique",
+            details: [
+                "Dartmouth Conference (1956) : naissance officielle du terme \"Intelligence Artificielle\".",
+                "Développement des premiers systèmes experts et résolution de problèmes symboliques.",
+                "Exemples : Logic Theorist, General Problem Solver (GPS)."
+            ]
+        },
+        {
+            date: "Années 1970",
+            title: "Les premiers défis et désillusions",
+            details: [
+                "L’hiver de l'IA : réduction des financements suite aux limites des systèmes symboliques.",
+                "Critiques des systèmes experts : trop rigides et incapables de gérer des tâches non explicitement codées."
+            ]
+        },
+        {
+            date: "Années 1980-1990",
+            title: "L'essor des algorithmes d'apprentissage",
+            details: [
+                "Retour des réseaux de neurones artificiels avec l'algorithme de rétropropagation.",
+                "Montée du Machine Learning : l'accent est mis sur l'apprentissage à partir de données plutôt que sur des règles explicites."
+            ]
+        },
+        {
+            date: "Années 2000-2010",
+            title: "Explosion des données et Deep Learning",
+            details: [
+                "Big Data et meilleure puissance de calcul (notamment via les GPU).",
+                "Deep Learning avec les réseaux de neurones profonds révolutionne des domaines comme la reconnaissance d'images, le traitement du langage naturel (NLP) et la traduction automatique.",
+                "Victoire d'AlphaGo (2016) contre le champion du monde de Go, Lee Sedol."
+            ]
+        },
+        {
+            date: "Actuel",
+            title: "IA actuelle et perspectives futures",
+            details: [
+                "L'IA est aujourd'hui utilisée à grande échelle dans les voitures autonomes, les assistants vocaux, les systèmes de recommandation, etc.",
+                "Défis actuels : éthique, biais dans les algorithmes, impact sur l'emploi.",
+                "Discussions sur la régulation et la sécurité des systèmes d'IA."
+            ]
+        }
+    ];
+
+    const timeline = document.querySelector('.timeline');
+
+    events.forEach((event, index) => {
+        const container = document.createElement('div');
+        container.classList.add('container');
+        container.classList.add(index % 2 === 0 ? 'left' : 'right');
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+
+        const date = document.createElement('h2');
+        date.classList.add('date');
+        date.textContent = event.date;
+
+        const title = document.createElement('h3');
+        title.textContent = event.title;
+
+        content.appendChild(date);
+        content.appendChild(title);
+
+        event.details.forEach(detail => {
+            const p = document.createElement('p');
+            p.textContent = detail;
+            content.appendChild(p);
+        });
+
+        container.appendChild(content);
+        timeline.appendChild(container);
+    });
+</script>
+
+</body>
+</html>

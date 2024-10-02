@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramme de Venn avec D3.js</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        text {
+            font-size: 16px;
+            fill: white;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body>
+    <h2>Diagramme de Venn - IA, Machine Learning, Deep Learning, Big Data, Data Science</h2>
+    <div id="diagram"></div>
+
+    <script>
+        // Dimensions du SVG
+        const width = 600;
+        const height = 500;
+
+        // Créer le conteneur SVG
+        const svg = d3.select("#diagram")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        // Ajout des cercles imbriqués
+        const circles = [
+            {cx: 300, cy: 200, r: 150, color: "#FFA07A", label: "Intelligence Artificielle", labelXOffset: 0, labelYOffset: -110},
+            {cx: 300, cy: 230, r: 120, color: "#CD5C5C", label: "Machine Learning", labelXOffset: 0, labelYOffset: -80},
+            {cx: 300, cy: 290, r: 60, color: "#8B4513", label: ["Deep", "Learning"], labelXOffset: 0, labelYOffset: 0},
+            {cx: 410, cy: 260, r: 100, color: "#4169E1", label: "Data Science", labelXOffset: 0, labelYOffset: -60},
+            {cx: 350, cy: 250, r: 40, color: "#4682B4", label: "Big Data", labelXOffset: 0, labelYOffset: 0}
+        ];
+
+        // Dessiner les cercles
+        svg.selectAll("circle")
+            .data(circles)
+            .enter()
+            .append("circle")
+            .attr("cx", d => d.cx)
+            .attr("cy", d => d.cy)
+            .attr("r", d => d.r)
+            .attr("fill", d => d.color)
+            .attr("opacity", 0.8);
+
+        // Ajouter des étiquettes aux cercles
+        svg.selectAll("text")
+            .data(circles)
+            .enter()
+            .append("text")
+            .attr("x", d => d.cx)
+            .attr("y", d => d.cy + d.labelYOffset)
+            .each(function(d) {
+                // Vérifier si le label est un tableau (pour gérer le cas de Deep Learning sur 2 lignes)
+                if (Array.isArray(d.label)) {
+                    d3.select(this)
+                      .selectAll("tspan")
+                      .data(d.label)  // Si le label est un tableau, créer des tspans pour chaque ligne
+                      .enter()
+                      .append("tspan")
+                      .attr("x", d.cx)  // Garder la même position horizontale
+                      .attr("dy", (line, i) => i === 0 ? 0 : "1.2em")  // Décaler les lignes suivantes verticalement
+                      .text(line => line);
+                } else {
+                    // Si le label est une seule ligne, afficher le texte normalement
+                    d3.select(this).text(d.label);
+                }
+            });
+    </script>
+</body>
+</html>
