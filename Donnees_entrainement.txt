@@ -5,3 +5,7 @@ Non	Oui	Oui	Spam
 Oui	Oui	Non	Spam
 Non	Non	Non	Non-Spam
 Non	Non	Oui	Non-Spam
+
+git remote add origin https://github.com/Sulliwen/ML_Spam_Detection.git
+
+git remote set-url origin https://github.com/Sulliwen/ML_Spam_Detection.git
